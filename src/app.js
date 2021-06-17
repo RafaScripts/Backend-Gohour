@@ -1,18 +1,28 @@
 //importação das bibliotecas
 
 const express = require("express");
-const cors = require("cors");
 const routes = require("./routes");
-const { errors } = require("celebrate");
+
+
+require("./Database/index");
 
 //inicia o express
-const app = express();
+class App {
+    constructor() {
+        this.server = express();
 
-//inicia todas as outras blibiotecas
-app.use(cors());
-app.use(express.json());
-app.use(routes);
-app.use(errors());
+        this.middlewares();
+        this.routes(); 
+    }
 
-//exporta o app.js
-module.exports = app;
+    middlewares() {
+        this.server.use(express.json());
+    }
+
+    routes() {
+        this.server.use(routes);
+    }
+}
+
+module.exports = new App().server;
+
