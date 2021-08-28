@@ -1,24 +1,24 @@
 //importando blibiotecas de rotas e verificações
-const { Router } = require("express");
-const User = require("./app/models/User");
-//inicia o routes para o express no servidor
-const routes = new Router(); 
+import { Router } from "express";
+import UserController from "./app/controllers/UserController";
+import SessionController from "./app/controllers/SessionController";
+import authMiddleware from "./app/middlewares/auth";
 
-//rota primaira
-routes.get('/', async (req, res) => {
-  return res.json('sss')
-});
+const routes = new Router();
 
-routes.get('/create-User', async (req, res) => {
-  const user = await User.create({
-    name: 'sssaaaa',
-    email: 'taaaesste@teste.com',
-    password_hash: '30303030',
-    whatsapp: '77900000000'
-  });
+//rotas
 
-  return res.json(user);
-});
+routes.post('/users', UserController.store);
+
+routes.post('/sessions', SessionController.store);
+
+routes.use(authMiddleware);
+
+routes.put('/users', UserController.update);
+
+
+
+
 
 //exporta as rotas
-module.exports = routes;
+export default routes;

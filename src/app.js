@@ -1,10 +1,10 @@
 //importação das bibliotecas
 
-const express = require("express");
-const routes = require("./routes");
+import express from "express";
+import routes from "./routes";
 
 
-require("./Database/index");
+import "./Database/index";
 
 //inicia o express
 class App {
@@ -24,5 +24,5 @@ class App {
     }
 }
 
-module.exports = new App().server;
+export default new App().server;
 

@@ -8,6 +8,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        unique: true,
       },
       name: {
         type: Sequelize.STRING,
@@ -18,13 +19,14 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      whatsapp: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       password_hash: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      provider: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       created_at: {
         type: Sequelize.DATE,

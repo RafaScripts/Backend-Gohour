@@ -1,10 +1,10 @@
 //configs do sequeize
 module.exports = {
   dialect: 'postgres',
-  host: 'bwq1phswushnaur2xwny-postgresql.services.clever-cloud.com',
-  username: 'uyj4xn4672vywyncx0ek',
-  password: 'dYTH8utVxZSFPNqehVIR',
-  database: 'bwq1phswushnaur2xwny',
+  host: '192.168.100.239',
+  username: 'postgres',
+  password: '032211',
+  database: 'Sys_agendamento',
   define: {
     timestamps: true,
     underscored: true,
