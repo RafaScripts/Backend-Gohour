@@ -31,13 +31,26 @@ class UserController {
         //verifica se o email da requisição é o mesmo que consta no banco de dados
         if (email !== user.email ){
             //faz a busca pelo email
-            const userExists = await User.findOne({ where: { email: req.body.email } });
+            const userExists = await User.findOne({ where: { email } });
 
             //se a busca retornar verdadeiro indicar que usuario ja foi cadastrado
             if(userExists){
                 return res.status(400).json({ error: "Email already exist." });
             }
         }
+
+        if(oldPassword && !(await user.checkPassowrd(oldPassword))){
+            return res.status(401).json({ error: "passwrod does not match." });
+        }
+
+        const {id, name, provider} = await user.update(req.body);
+
+        return res.json({
+            id,
+            name,
+            email,
+            provider
+        });
 
     }
     
