@@ -1,7 +1,19 @@
 import User from "../models/User";
+import * as Yup from "yup";
 
 class UserController {
     async store(req, res){
+
+        //Validação de dados
+        const schema = Yup.object().shape({
+            name: Yup.string().required(),
+            email: Yup.string().email().required(),
+            password: Yup.string().required().min(8),
+        });
+
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({ error: "Validation fails" });
+        }
 
         const exceptionUser = await User.findOne({ where: { email: req.body.email } });
 
@@ -22,6 +34,18 @@ class UserController {
 
 
     async update(req, res) {
+
+        //Validação de dados
+        const schema = Yup.object().shape({
+            name: Yup.string().required(),
+            email: Yup.string().email().required(),
+            oldPassword: Yup.string().required().min(8),
+        });
+
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({ error: "Validation fails" });
+        }
+
         //buscar email e senha que serão alterados
         const { email, oldPassword } = req.body;
 
