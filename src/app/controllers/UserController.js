@@ -37,9 +37,15 @@ class UserController {
 
         //Validação de dados
         const schema = Yup.object().shape({
-            name: Yup.string().required(),
-            email: Yup.string().email().required(),
-            oldPassword: Yup.string().required().min(8),
+            name: Yup.string(),
+            email: Yup.string().email(),
+            oldPassword: Yup.string().min(8),
+            password: Yup.string().min(8).when('oldPassword', (oldPassword, field) =>
+            oldPassword ? field.required() : field
+            ),
+            confirmPassowrd: Yup.string().when('password', (password, field) =>
+            password ? field.required().oneOf([Yup.ref('password')]) : field
+            ),
         });
 
         if(!(await schema.isValid(req.body))){
