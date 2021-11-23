@@ -1,9 +1,9 @@
-Backend-AgendaAi
+**Backend-AgendaAi**
 Backend projeto de sistema de gestão de Agendamentos
 
 sistema para agendamento de horários
 
-~~Como instalar e Executar~~
+**Como instalar e Executar**
 
 1. Primerio execute o download do codigo ( pode ser em arquivo zip ou por comando )
 
@@ -15,7 +15,7 @@ sistema para agendamento de horários
 ou
 `npm install`
 
-~~executar~~
+**executar**
 
 para executar use:
 
@@ -23,5 +23,5 @@ para executar use:
 ou
 `npm dev`
 
-~~**ENGLISH**~~
+**ENGLISH**
 
