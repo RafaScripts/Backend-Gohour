@@ -12,6 +12,7 @@
   "author": "RafaScripts",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1035.0",
     "bcryptjs": "^2.4.3",
     "celebrate": "^14.0.0",
     "cors": "^2.8.5",
@@ -19,6 +20,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.3",
+    "multer-s3": "^2.10.0",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.6.2",
