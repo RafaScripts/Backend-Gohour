@@ -1,13 +1,13 @@
 import multer from "multer";
 import crypto from "crypto";
 import { extname, resolve } from "path";
-import AWS from "aws-sdk";
+//import AWS from "aws-sdk";
 import multers3 from "multer-s3";
 
-const SpaceEndPoint = new AWS.Endpoint('sfo3.digitaloceanspaces.com');
-const S3 = new AWS.S3({
+//const SpaceEndPoint = new AWS.Endpoint('sfo3.digitaloceanspaces.com');
+/*const S3 = new AWS.S3({
     endpoint: SpaceEndPoint
-})
+})*/
 
 export default {
     storage: multer.diskStorage({

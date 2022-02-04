@@ -1,10 +1,10 @@
 //configs do sequeize
 module.exports = {
   dialect: 'postgres',
-  host: '167.99.155.16',
+  host: '159.223.111.47',
   username: 'postgres',
   password: '032211',
-  database: 'agendaAi',
+  database: 'agendaai',
   define: {
     timestamps: true,
     underscored: true,
