@@ -25,6 +25,10 @@ class User extends Model {
         return this;
     }
 
+    static associate(models) {
+        this.belongsTo(models.File, { foreignKey: 'avatar_id' });
+    }
+
     checkPassowrd(password){
         return bcrypt.compare(password, this.password_hash);
     }
@@ -32,5 +36,3 @@ class User extends Model {
 }
 
 export default User;
-
-//module.exports = User;
