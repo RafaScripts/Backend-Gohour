@@ -1,8 +1,10 @@
 import Appointment from '../models/Appointment';
-import { startOfHour, parseISO, isBefore } from "date-fns";
+import { startOfHour, parseISO, isBefore, format, subHours } from "date-fns";
+import pt from "date-fns/locale/pt"
 import User from "../models/User";
 import File from "../models/File";
 import * as yup from 'yup';
+import Notification from "../schemas/notification";
 
 class AppointementController {
     async index(req, res){
@@ -82,7 +84,43 @@ class AppointementController {
             date: hourStart,
         });
 
+        const user = await User.findByPk(req.userId);
+
+        const formattedDate = format(
+            hourStart,
+            "'dia' dd 'de' MMMM', às' H:mm'h'",
+            { locale: pt }
+            );
+
+        await Notification.create({
+            content: `Novo agendamento de ${user.name} para ${formattedDate}`,
+            user: provider_id,
+        });
+
         return res.json(appointment);
+    }
+
+    async delete(req, res){
+        const appointment = await Appointment.findByPk(req.params.id);
+
+        if(appointment.user_id !== req.userId){
+            return res.status(401)
+                .json({ error: "you dont't have permission to cancel this appointment" });
+        }
+
+        const dateWhithsub = subHours(appointment.date, 3);
+
+        if(isBefore(dateWhithsub, new Date())){
+            return res.status(401)
+                .json({ error: "You can only cancel appointiments 3 hours ind advance." });
+        }
+
+        appointment.canceled_at = new Date();
+
+        await appointment.save();
+
+        return res.json(appointment);
+
     }
 }
 

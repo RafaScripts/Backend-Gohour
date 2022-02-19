@@ -1,4 +1,4 @@
-
+import mongoose from "mongoose";
 const Sequelize = require("sequelize");
 
 import databaseConfig from "../config/database";
@@ -13,6 +13,7 @@ const models = [User, File, Appointment];
 class Database {
     constructor() {
         this.init();
+        this.mongo();
     }
 
 
@@ -23,6 +24,12 @@ class Database {
             .map(model => model.init(this.connection))
             .map(model => model.associate && model.associate(this.connection.models));
 
+    }
+
+    mongo(){
+        this.mongoConnection = mongoose.connect(
+            'mongodb://159.223.111.47:27017/agendaai'
+        );
     }
 }
 
